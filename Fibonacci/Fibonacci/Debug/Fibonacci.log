@@ -1,0 +1,4 @@
+﻿  source.cpp
+d:\uad\6\analisis y algoritmos\fibonacci\fibonacci\timer.h(19): warning C4091: 'static ': se ha omitido a la izquierda de 'Timer' cuando no hay ninguna variable declarada
+d:\uad\6\analisis y algoritmos\fibonacci\fibonacci\source.cpp(6): warning C4326: el tipo de valor devuelto de 'main' debe ser 'int' en lugar de 'void'
+  Fibonacci.vcxproj -> D:\UAD\6\Analisis y algoritmos\Fibonacci\Debug\Fibonacci.exe
