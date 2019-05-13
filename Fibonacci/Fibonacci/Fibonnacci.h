@@ -3,17 +3,19 @@
 
 class Fibonnacci
 {
-	unsigned long		m_value;
-	unsigned long		Recursive(unsigned int index);
+	unsigned long		m_value; //Allocates the result of the algorithm
+	unsigned long		Recursive(unsigned int index); //Private method that returns the resulting value in a recursive implementation
 
 public:
 
-	unsigned long		Calc(unsigned int index);
-	void				RecursiveCalc(unsigned int index);
+	//This method allocates the resulting value of the Recursive implementation in "m_value"
+	void				RecursiveCalc(unsigned int index); 
 	
-	void				Print();
+	unsigned long		Calc(unsigned int index); //non-recursive implementation
+	
+	void				Print(); //Prints the resulting value
 
-	Fibonnacci();
+	Fibonnacci() = default;
 	~Fibonnacci() = default;
 };
 
