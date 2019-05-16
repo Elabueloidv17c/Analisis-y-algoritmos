@@ -34,10 +34,18 @@ void main()
 		}
 	}
 
+	std::cout << "Insertion sort: \n";
 	timer.Start();
-	sort.BubbleSort();
+	sort.InsertionSort(sort.m_values);
 	timer.End();
 
+	std::cout << "\nBubble sort: \n";
+	timer.Start();
+	sort.BubbleSort(sort.m_values);
+	timer.End();
+
+	sort.m_values = sort.BubbleSort(sort.m_values);
 	sort.Print();
 	std::cin.ignore();
+	std::cin.get();
 }

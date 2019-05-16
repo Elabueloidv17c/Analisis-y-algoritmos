@@ -49,20 +49,48 @@ void Sorter::Print()
 	}
 }
 
-void Sorter::BubbleSort()
+std::vector<unsigned int> Sorter::BubbleSort(const std::vector<unsigned int>& values)
 {
+	std::vector<unsigned int> sorted = values;
+
 	unsigned int i, j, temp;
 
-	for (i = 0; i < m_values.size() - 1; i++)
+	for (i = 0; i < sorted.size() - 1; i++)
 	{
-		for (j = 0; j < m_values.size() - i - 1; j++)
+		for (j = 0; j < sorted.size() - i - 1; j++)
 		{
-			if (m_values[j] > m_values[j + 1])
+			if (sorted[j] > sorted[j + 1])
 			{
-				temp = m_values[j];
-				m_values[j] = m_values[j + 1];
-				m_values[j + 1] = temp;
+				temp = sorted[j];
+				sorted[j] = sorted[j + 1];
+				sorted[j + 1] = temp;
 			}
 		}
 	}
+
+	return sorted;
+}
+
+std::vector<unsigned int> Sorter::InsertionSort(const std::vector<unsigned int>& values)
+{
+	std::vector<unsigned int> sorted = values;
+
+	int i, key, j;
+
+	for (i = 1; i < sorted.size(); i++)
+	{
+		key = sorted[i];
+
+		j = i - 1;
+
+		while (j >= 0 && sorted[j] > key)
+		{
+			sorted[j + 1] = sorted[j];
+			j -= 1;
+		}
+
+		sorted[j + 1] = key;
+	}
+
+	return sorted;
 }
