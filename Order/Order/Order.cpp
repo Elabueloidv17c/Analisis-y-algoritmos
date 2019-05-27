@@ -1,11 +1,13 @@
 #include <iostream>
 #include "Headers.h"
+#include "Search.h"
 #include "Sorter.h"
 #include "Timer.h"
 
 void main()
 {
 	Sorter sort;
+	Search searcher;
 	Timer timer;
 
 	unsigned int size;
@@ -16,17 +18,20 @@ void main()
 	std::cout << "En que orden se crearan los valores\n\n  1.- Orden Ascendente\n  2.- Orden Descendente\n  3.- Aleatorio\n\n";
 	std::cin >> type;
 
+	std::vector<unsigned int> values;
+	std::vector<unsigned int> values2;
+
 	if (type == 1)
 	{
-		sort.IncreasingGen(size);
+		sort.IncreasingGen(values, size);
 	}
 	else if (type == 2)
 	{
-		sort.DecreasingGen(size);
+		sort.DecreasingGen(values, size);
 	}
 	else if(type > 2)
 	{
-		sort.RandomGen(size);
+		sort.RandomGen(values, size);
 
 		if (type != 3)
 		{
@@ -34,18 +39,34 @@ void main()
 		}
 	}
 
-	std::cout << "Insertion sort: \n";
+	values2 = values;
+
+	std::cout << "QuickSort: \n";
 	timer.Start();
-	sort.InsertionSort(sort.m_values);
+	sort.QuickSort(values);
 	timer.End();
 
-	std::cout << "\nBubble sort: \n";
+	std::cout << "\nMergeSort: \n";
 	timer.Start();
-	sort.BubbleSort(sort.m_values);
+	sort.MergeSort(values2);
 	timer.End();
 
-	sort.m_values = sort.BubbleSort(sort.m_values);
-	sort.Print();
+	int test;	
+	std::cout << "\nBinary Search: \n";
+	timer.Start();
+	test = searcher.BinarySearch(values, values.size() - 1);
+	timer.End();
+	std::cout << "\n" << "El numero esta en el indice "<< test << "\n\n";
+
+	std::cout << "\nLinear Search: \n";
+	timer.Start();
+	test = searcher.LinearSearch(values, values.size() - 1);
+	timer.End();
+	std::cout << "\n" << "El numero esta en el indice " << test << "\n\n";
+
+	//sort.Print(values);
+	//sort.Print(values2);
+	
 	std::cin.ignore();
 	std::cin.get();
 }
