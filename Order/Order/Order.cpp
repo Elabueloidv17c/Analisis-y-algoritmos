@@ -41,14 +41,14 @@ void main()
 
 	values2 = values;
 
-	std::cout << "QuickSort: \n";
+	std::cout << "Counting: \n";
 	timer.Start();
-	sort.QuickSort(values);
+	sort.CountingSort(values);
 	timer.End();
 
-	std::cout << "\nMergeSort: \n";
+	std::cout << "\nRadix: \n";
 	timer.Start();
-	sort.MergeSort(values2);
+	sort.RadixSort(values2);
 	timer.End();
 
 	int test;	
@@ -64,8 +64,8 @@ void main()
 	timer.End();
 	std::cout << "\n" << "El numero esta en el indice " << test << "\n\n";
 
-	//sort.Print(values);
-	//sort.Print(values2);
+	sort.Print(values);
+	sort.Print(values2);
 	
 	std::cin.ignore();
 	std::cin.get();

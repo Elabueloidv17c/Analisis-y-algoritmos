@@ -201,3 +201,97 @@ void Sorter::MergeSort(std::vector<unsigned int>& values)
 {
 	MergeSortHelper(values, 0, values.size() -1);
 }
+
+void Sorter::CountingSort(std::vector<unsigned int>& values)
+{
+	std::vector<unsigned int> temp;
+	std::vector<unsigned int> counter;
+
+	auto it = std::max_element(values.begin(), values.end());
+	int maxValue = *it + 1;
+
+	temp.resize(values.size(), 0);
+	counter.resize(maxValue, 0);
+
+	for (int i = 0; i < values.size(); ++i)
+	{ 
+		++counter[values[i]];
+	}
+	
+	for (int i = 1; i < maxValue; ++i) 
+	{ 
+		counter[i] += counter[i - 1]; 
+	}
+	
+	for (int i = 0; i < values.size(); ++i)
+	{
+		temp[counter[values[i]] - 1] = values[i];
+		--counter[values[i]];
+	}
+
+	memcpy(values.data(), temp.data(), values.size());
+}
+
+void Sorter::RadixSortHelper(std::vector<unsigned int>& values, int pos, int maxValue)
+{
+	std::vector<unsigned int> temp;
+	std::vector<unsigned int> counter;
+
+	temp.resize(values.size(), 0);
+	counter.resize(maxValue, 0);
+
+	int i = 0;
+	for (i = 0; i < values.size(); ++i)
+	{
+		++counter[(values[i] / pos) % 10];
+	}
+	for (i = 1; i < maxValue; ++i)
+	{
+		counter[i] += counter[i - 1];
+	}
+	for (i = values.size() - 1; i >= 0; --i)
+	{
+		temp[counter[(values[i] / pos) % 10] - 1] = values[i];
+		--counter[(values[i] / pos) % 10];
+	}
+
+	memcpy(values.data(), temp.data(), values.size());
+}
+void Sorter::RadixSort(std::vector<unsigned int>& values)
+{
+	int maxValue = *std::max_element(values.begin(), values.end());
+
+	for (int pos = 1; maxValue / pos > 0; pos *= 10)
+	{
+		RadixSortHelper(values, pos, maxValue + 1);
+	}
+}
+
+void Sorter::BucketSort(std::vector<float> & values)
+{
+	int size = values.size();
+
+	std::vector<std::vector<float>> buckets;
+	buckets.resize(size);
+
+	for (int i = 0; i < size; ++i)
+	{
+		int index = size * values[i];
+		buckets[index].push_back(values[i]);
+	}
+
+	for (int i = 0; i < size; ++i)
+	{
+		std::sort(buckets[i].begin(), buckets[i].end(), std::less<float>());
+	}
+
+	int index = 0;
+
+	for (int i = 0; i < size; ++i)
+	{
+		for (int j = 0; j < buckets[i].size(); ++j)
+		{
+			values[index++] = buckets[i][j];
+		}
+	}
+}
